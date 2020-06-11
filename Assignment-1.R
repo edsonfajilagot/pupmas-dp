@@ -21,7 +21,7 @@ class_rec <- data.frame(student,gender,math,eng,sci)
 # Add new column Performance indicator (average of all subjects)
 class_rec <- class_rec %>%
   rowwise() %>%
-  mutate(Ave = round(mean(c(math, eng, sci))))
+  mutate(Ave = round(mean(c(math, eng, sci)),2))
 
 
 # Add Letter indicator for Performance indicator
@@ -31,15 +31,24 @@ class_rec <- class_rec %>%
 # 61-70: D
 # 51-60: E
 # 50 and below: F
+#class_rec <- class_rec %>%
+#  mutate(Grade = ifelse(Ave %in% 91:100, "A",
+#                        ifelse(Ave %in% 81:90, "B",
+#                               ifelse(Ave %in% 71:80, "C",
+#                                      ifelse(Ave %in% 61:70, "D",
+#                                             ifelse(Ave %in% 51:60, "E", "F"))))))
+
+
 class_rec <- class_rec %>%
-  rowwise() %>%
-  mutate(Grade = ifelse(Ave %in% 91:100, "A",
-                        ifelse(Ave %in% 81:90, "B",
-                               ifelse(Ave %in% 71:80, "C",
-                                      ifelse(Ave %in% 61:70, "D",
-                                             ifelse(Ave %in% 51:69, "E", "F"))))))
+  mutate(Grade = ifelse(Ave >= 91, "A",
+                         ifelse(Ave >= 81 & Ave < 91, "B",
+                                ifelse(Ave >= 71 & Ave < 81, "C",
+                                       ifelse(Ave >= 61 & Ave < 71, "D",
+                                              ifelse(Ave >= 51 & Ave < 61, "E", "F"))))))
+
 
 # Arrange student by Grade and Lastname
 class_rec <- class_rec %>%
   separate(student, c("Firstname", "Lastname"), sep=" ") %>%
   arrange(Grade, Lastname)
+
