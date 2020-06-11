@@ -30,7 +30,7 @@ class_rec <- class_rec %>%
 # 71-80: C
 # 61-70: D
 # 51-60: E
-# 50 and below: F
+# Below 51: F
 #class_rec <- class_rec %>%
 #  mutate(Grade = ifelse(Ave %in% 91:100, "A",
 #                        ifelse(Ave %in% 81:90, "B",
