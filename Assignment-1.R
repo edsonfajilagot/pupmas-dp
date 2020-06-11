@@ -52,3 +52,20 @@ class_rec <- class_rec %>%
   separate(student, c("Firstname", "Lastname"), sep=" ") %>%
   arrange(Grade, Lastname)
 
+
+# Combining R commands
+class_rec <- class_rec %>%
+  rowwise() %>%
+  mutate(Ave = round(mean(c(math, eng, sci)),2)) %>%
+  mutate(Grade = ifelse(Ave >= 91, "A",
+                        ifelse(Ave >= 81 & Ave < 91, "B",
+                               ifelse(Ave >= 71 & Ave < 81, "C",
+                                      ifelse(Ave >= 61 & Ave < 71, "D",
+                                             ifelse(Ave >= 51 & Ave < 61, "E", "F")))))) %>%
+  separate(student, c("Firstname", "Lastname"), sep=" ") %>%
+  arrange(Grade, Lastname)
+
+
+  
+
+
