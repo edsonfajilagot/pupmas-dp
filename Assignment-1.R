@@ -1,4 +1,8 @@
 # Assignment - 1
+library(dplyr)
+library(tidyr)
+
+
 # Generate dataset
 possible_score <- 40:100
 math <- sample(possible_score, 15)
@@ -35,7 +39,7 @@ class_rec <- class_rec %>%
                                       ifelse(Ave %in% 61:70, "D",
                                              ifelse(Ave %in% 51:69, "E", "F"))))))
 
-# Arrange student by Lastname and Grade
+# Arrange student by Grade and Lastname
 class_rec <- class_rec %>%
   separate(student, c("Firstname", "Lastname"), sep=" ") %>%
-  arrange(Lastname, Grade)
+  arrange(Grade, Lastname)
