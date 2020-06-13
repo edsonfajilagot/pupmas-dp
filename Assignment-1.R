@@ -47,13 +47,28 @@ class_rec <- class_rec %>%
                                               ifelse(Ave >= 51 & Ave < 61, "E", "F"))))))
 
 
+
 # Arrange student by Grade and Lastname
 class_rec <- class_rec %>%
   separate(student, c("Firstname", "Lastname"), sep=" ") %>%
-  arrange(Grade, Lastname)
+  arrange(desc(Ave), Lastname)
 
 
-# Combining R commands
+# Add row number
+class_rec$row_id <- seq.int(nrow(class_rec))
+
+
+# Add grouping, first 3 = A, next 3 = B, ....
+class_rec <- class_rec %>%
+  mutate(Group = ifelse(row_id <= 3, "A",
+                        ifelse(row_id > 3 & row_id <= 6, "B",
+                               ifelse(row_id > 6 & row_id <= 9, "C",
+                                      ifelse(row_id > 9 & row_id <= 12, "D", "E")))))
+
+
+
+# Option 2
+# Combining all R commands
 class_rec <- class_rec %>%
   rowwise() %>%
   mutate(Ave = round(mean(c(math, eng, sci)),2)) %>%
@@ -63,7 +78,14 @@ class_rec <- class_rec %>%
                                       ifelse(Ave >= 61 & Ave < 71, "D",
                                              ifelse(Ave >= 51 & Ave < 61, "E", "F")))))) %>%
   separate(student, c("Firstname", "Lastname"), sep=" ") %>%
-  arrange(Grade, Lastname)
+  arrange(desc(Ave), Lastname) %>%
+  mutate(row_id = seq.int(nrow(class_rec))) %>%
+  mutate(Group = ifelse(row_id <= 3, "A",
+                        ifelse(row_id > 3 & row_id <= 6, "B",
+                               ifelse(row_id > 6 & row_id <= 9, "C",
+                                      ifelse(row_id > 9 & row_id <= 12, "D", "E")))))
+  
+  
 
 
   
