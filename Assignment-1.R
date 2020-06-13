@@ -1,4 +1,6 @@
 # Assignment - 1
+# Submitted by: Edson Fajilagot & Ruth Montes
+
 library(dplyr)
 library(tidyr)
 
@@ -18,6 +20,7 @@ class_rec <- data.frame(student,gender,math,eng,sci)
 #class_rec <- within(class_rec, rm(ave)) # drop ave column
 
 
+# Option 1 ------------------------------------------------------------------------------------------
 # Add new column Performance indicator (average of all subjects)
 class_rec <- class_rec %>%
   rowwise() %>%
@@ -67,7 +70,7 @@ class_rec <- class_rec %>%
 
 
 
-# Option 2
+# Option 2 ----------------------------------------------------------------------------------
 # Combining all R commands
 class_rec <- class_rec %>%
   rowwise() %>%
