@@ -48,3 +48,53 @@ sample.df <- sample.df %>%
 
 # fix
 fix(sample.df)
+
+
+# Missing data
+firstname <- c("John", "Luis", "Marc")
+age <- c(23, NA, 34)
+info <- data.frame(Firstname=firstname, Age=age)
+View(info)
+
+# Check NA
+is.na(info$Age)
+info[!is.na(info$Age),]
+
+# Select 2nd column
+info[,2]
+
+# select 1st row
+info[1,]
+
+# select a cell
+info[2,2]
+
+# Select column
+info$Course <- c("Engineering", "Math", "Medicine")
+info[, c("Age")]
+info[, c("Age", "Course")]
+attach(info)
+info[Age > 25,]
+info[Age > 25 & is.na(Age) == FALSE,]
+
+# Using data table
+library(data.table)
+info.dt <- as.data.table(info)
+
+info.dt$Address <- c("Manila", "QC", "Davao")
+info.dt[1:3,]
+
+#rbind(info.dt, new_rec)
+info.dt[Age > 25,]
+info.dt[, Age > 25]
+info.dt[,Address == "Manila"]
+
+#new rec, from vector
+new_rec <- c("Felix", 43, "Stat", "Hongkong")
+new_rec.df <- as.data.frame(t(new_rec))
+colnames(new_rec.df) <- colnames(info.dt)
+info.dt <- rbind(info.dt, new_rec.df)
+
+new_rec <- c("Mich", 13, "Bio", "Cebu")
+new_rec.df <- as.data.frame(t(new_rec))
+info.dt <- rbind(info.dt, new_rec.df, use.names=FALSE)
