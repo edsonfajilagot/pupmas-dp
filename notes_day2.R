@@ -55,7 +55,6 @@ firstname <- c("John", "Luis", "Marc")
 age <- c(23, NA, 34)
 info <- data.frame(Firstname=firstname, Age=age)
 View(info)
-
 # Check NA
 is.na(info$Age)
 info[!is.na(info$Age),]
@@ -98,3 +97,19 @@ info.dt <- rbind(info.dt, new_rec.df)
 new_rec <- c("Mich", 13, "Bio", "Cebu")
 new_rec.df <- as.data.frame(t(new_rec))
 info.dt <- rbind(info.dt, new_rec.df, use.names=FALSE)
+
+# Sampling
+set.seed(1)
+sample(1:10, 3, prob = NULL)
+
+# Distributions
+help("Distributions")
+
+x.coor <- pretty(c(0,10), 30)
+y.coor <- dexp(x.coor,2)
+plot(x.coor, y.coor, type="l", col="red", xlab="Exponential Deviate", ylab="Density")
+
+hist(rnorm(50))
+
+mydata.h <- matrix(rnorm(60, mean = 2), nrow=15)
+apply(mydata.h, 1, mean)
