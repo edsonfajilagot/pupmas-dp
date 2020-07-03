@@ -9,6 +9,19 @@ exp.data <- data.frame(gender=as.factor(gender),
                        reaction=reaction.time)
 
 attach(exp.data)
-anova2 <- aov(reaction~as.factor(gender) * as.factor(crowd), data = exp.data)
+anova2 <- aov(reaction~gender*crowd, data = exp.data)
 summary(anova2)
 
+# plot
+plot(anova2)
+
+
+# one-factor
+anova1.a <- aov(reaction~gender, data = exp.data)
+summary(anova1.a)
+
+anova1.b <- aov(reaction~crowd, data = exp.data)
+summary(anova1.b)
+
+anova1.c <- aov(reaction~crowd + gender, data = exp.data)
+summary(anova1.c)
