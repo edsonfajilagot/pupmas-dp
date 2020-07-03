@@ -50,3 +50,10 @@ tab.df <- as.data.frame(tab.dt)
 tab.df[2:3,]
 tab.df[order(tab.df$v),]
 
+
+# review
+DT2 <- data.table(x=1:3, y=c("a", "b", "c"))
+DT3 <- transform(DT2, z=x * 2)
+DT3[, w:=x*2]
+DT3[, ':='(q=x*2, r=x*3)]
+
