@@ -1,4 +1,4 @@
-# two-factor anova
+# two-factor anova example
 
 gender <- c(0,0,1,1,0,0,1,1,0,0,1,1)
 crowd.size <- c(rep(0,4), rep(2,4), rep(4,4))
