@@ -30,5 +30,8 @@ summary(anova1.a)
 anova1.b <- aov(reaction~crowd, data = exp.data)
 summary(anova1.b)
 
+anova1.b2 <- oneway.test(reaction~crowd, data = exp.data)
+summary(anova1.b2)
+
 anova1.c <- aov(reaction~crowd + gender, data = exp.data)
 summary(anova1.c)
